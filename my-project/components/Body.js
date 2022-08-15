@@ -1,60 +1,32 @@
-// import AssetItem from "./AssetItem";
-import logoImage from "../public/images/placeholder.svg";
-// import { ASA_LIST } from "../queries/asaListQuery";
-// import { useQuery } from "@apollo/client";
-// import LoadingSpinner from "./UI/LoadingSpinner";
-// import ErrorNotification from "./UI/ErrorNotification";
-// import { Fragment } from "react";
+import AssetItem from "./AssetItem";
+import logoImage from "../assets/placeholder.svg";
+import LoadingSpinner from "./ui/LoadingSpinner";
+import ErrorNotification from "./ui/ErrorNotification";
+import { Fragment } from "react";
+import { useQuery } from "@apollo/client";
+import { ASA_LIST } from "../queries/asaListQuery";
 
-import { gql } from "@apollo/client";
-import client from "../apollo-client";
-
-const Body = ({ asaList }) => {
-  console.log(asaList)
-  // const { loading, error, data } = useQuery(ASA_LIST);
-  // if (loading) return <LoadingSpinner />;
-  // if (error) return <ErrorNotification />;
+const Body = () => {
+  const { loading, error, data } = useQuery(ASA_LIST);
+  if (loading) return <LoadingSpinner />;
+  if (error) return <ErrorNotification />;
 
   return (
     <div className="p-8 md:p-12 lg:p-16 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      Body
-      {/* {!loading && !error && (
+      {!loading && !error && (
         <Fragment>
           {data.asalist.results.map((asset) => (
             <AssetItem
               key={asset.assetId}
-              imageSrc={asset.logo ? asset.logo : logoImage}
+              imageSrc={asset.logo ? asset.logo : logoImage.src}
               name={asset.name}
               availability={asset.available}
             />
           ))}
         </Fragment>
-      )} */}
+      )}
     </div>
   );
 };
 
 export default Body;
-
-export async function getStaticProps() {
-  const { data } = await client.query({
-    query: gql`
-      {
-        asalist {
-          results {
-            assetId
-            name
-            available
-            logo
-          }
-        }
-      }
-    `,
-  });
-
-  return {
-    props: {
-      asaList: data.asalist.results,
-    },
-  };
-}
