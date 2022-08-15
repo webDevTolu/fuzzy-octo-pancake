@@ -1,3 +1,18 @@
+import Head from "next/head";
+import { Fragment } from "react";
+import Body from "../components/Body";
+import Header from "../components/Header";
+
 export default function Home() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+  return (
+    <Fragment>
+      <Head>
+        <title>Asalytics</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      
+      <Header />
+      <Body />
+    </Fragment>
+  );
 }

@@ -5,6 +5,9 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      read: ["Readex Pro", "sans-serif"],
+    },
     extend: {},
   },
   plugins: [],
